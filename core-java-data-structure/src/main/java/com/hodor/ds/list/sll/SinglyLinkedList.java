@@ -55,10 +55,12 @@ public class SinglyLinkedList<T> implements List<T> {
 		// default constructor
 	}
 
+	@Override
 	public void add(final T element) {
 		addLast(element);
 	}
 
+	@Override
 	public void addFirst(final T element) {
 		if (isEmpty()) {
 			addNodeInEmptyList(element);
@@ -69,6 +71,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
+	@Override
 	public void addLast(final T element) {
 		if (isEmpty()) {
 			addNodeInEmptyList(element);
@@ -82,6 +85,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
+	@Override
 	public void add(final int index, final T element) {
 		checkPositionIndex(index);
 		if (index == 0) {
@@ -98,13 +102,17 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
-	public void add(final T... elements) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void addElements(final T... elements) {
 		for (final T temp : elements) {
 			addLast(temp);
 		}
 	}
 
-	public void add(final int index, final T... elements) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void addElements(final int index, final T... elements) {
 		if (elements == null || elements.length == 0) {
 			return;
 		} else if (index == 0 || index == size) {
@@ -125,6 +133,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
+	@Override
 	public void printList() {
 		Node<T> tempNode = first;
 		if (tempNode == null) {
@@ -138,10 +147,12 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
+	@Override
 	public int size() {
 		return size;
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void clear() {
 		if (isEmpty()) {
@@ -159,13 +170,14 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
+	@Override
 	public boolean remove(final T element) throws ElementNotFoundException {
 		boolean found = false;
 		if (!isEmpty()) {
-			if (element.equals(first.value)) {
+			if ((element != null && element.equals(first.value) || (element == null && element == first.value))) {
 				found = true;
 				removeFirst();
-			} else if (element.equals(last.value)) {
+			} else if ((element != null && element.equals(last.value) || (element == null && element == last.value))) {
 				found = true;
 				removeLast();
 			} else {
@@ -189,6 +201,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		return found;
 	}
 
+	@Override
 	public T removeFirst() {
 		T element = null;
 		if (!isEmpty()) {
@@ -203,6 +216,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		return element;
 	}
 
+	@Override
 	public T removeLast() {
 		T element = null;
 
@@ -226,6 +240,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		return element;
 	}
 
+	@Override
 	public T remove(final int index) {
 		checkElementIndex(index);
 		T removedElement = null;
@@ -246,51 +261,67 @@ public class SinglyLinkedList<T> implements List<T> {
 		return removedElement;
 	}
 
+	@Override
 	public void reverse() {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
 	public List<T> reverseList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public T set(final int index, final T newElement) throws ElementNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return first == null || last == null || size == 0;
 	}
 
+	@Override
 	public boolean contains(final T element) {
 		return indexOf(element) != -1;
 	}
 
+	@Override
 	public int indexOf(final T element) {
 		int indexOfFirstOcuurenceOfElement = -1;
 		if (!isEmpty()) {
 			Node<T> tempNode = first;
 			int i = 0;
 			while (tempNode != null) {
-				if (tempNode.value.equals(element)) {
-					indexOfFirstOcuurenceOfElement = i;
-					break;
+				if (tempNode.value == null) {
+					if (element == tempNode.value) {
+						indexOfFirstOcuurenceOfElement = i;
+						break;
+					}
+				} else {
+					if (tempNode.value.equals(element)) {
+						indexOfFirstOcuurenceOfElement = i;
+						break;
+					}
 				}
 				i++;
 				tempNode = tempNode.next;
 			}
+
 		}
 		return indexOfFirstOcuurenceOfElement;
 	}
 
+	@Override
 	public T get(final int index) {
 		checkElementIndex(index);
 		final Node<T> tempNode = getNodeByIndex(index);
 		return tempNode.value;
 	}
 
+	@Override
 	public T getFirst() {
 		if (isEmpty()) {
 			throw new ListEmptyException(getIndexMessage(-1));
@@ -298,6 +329,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		return first.value;
 	}
 
+	@Override
 	public T getLast() {
 		if (isEmpty()) {
 			throw new ListEmptyException(getIndexMessage(-1));
@@ -305,22 +337,30 @@ public class SinglyLinkedList<T> implements List<T> {
 		return last.value;
 	}
 
+	@Override
 	public int lastIndexOf(final T element) {
-		int indexOfLastOcuurenceOfElement = -1;
+		int indexOfLastOcurrenceOfElement = -1;
 		if (!isEmpty()) {
 			Node<T> tempNode = first;
 			int i = 0;
 			while (tempNode != null) {
-				if (tempNode.value.equals(element)) {
-					indexOfLastOcuurenceOfElement = i;
+				if (tempNode.value == null) {
+					if (element == tempNode.value) {
+						indexOfLastOcurrenceOfElement = i;
+					}
+				} else {
+					if (tempNode.value.equals(element)) {
+						indexOfLastOcurrenceOfElement = i;
+					}
 				}
 				i++;
 				tempNode = tempNode.next;
 			}
 		}
-		return indexOfLastOcuurenceOfElement;
+		return indexOfLastOcurrenceOfElement;
 	}
 
+	@Override
 	public Object[] toArray() {
 		final Object[] objArr = new Object[size];
 		if (!isEmpty()) {
@@ -381,12 +421,23 @@ public class SinglyLinkedList<T> implements List<T> {
 		Node<T> nodeBeforeElement = null;
 		boolean found = false;
 		if (!isEmpty()) {
-			for (Node<T> tempNode = first; tempNode.next != null; tempNode = tempNode.next) {
-				if (element.equals(tempNode.value)) {
-					found = true;
-					break;
+			// To handle the null value
+			if (element == null) {
+				for (Node<T> tempNode = first; tempNode.next != null; tempNode = tempNode.next) {
+					if (element == tempNode.value) {
+						found = true;
+						break;
+					}
+					nodeBeforeElement = tempNode;
 				}
-				nodeBeforeElement = tempNode;
+			} else {
+				for (Node<T> tempNode = first; tempNode.next != null; tempNode = tempNode.next) {
+					if (element.equals(tempNode.value)) {
+						found = true;
+						break;
+					}
+					nodeBeforeElement = tempNode;
+				}
 			}
 		}
 		if (!found) {

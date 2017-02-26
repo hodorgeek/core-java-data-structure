@@ -12,7 +12,9 @@ public interface List<T> {
 
 	public void add(int position, T Element);
 
-	public void add(T... elements);
+	public void addElements(T... elements);
+
+	public void addElements(int index, T... elements);
 
 	public boolean remove(T element) throws ElementNotFoundException;
 
@@ -21,7 +23,7 @@ public interface List<T> {
 	public T removeLast();
 
 	public T remove(int index);
-	
+
 	public void reverse();
 
 	public List<T> reverseList();

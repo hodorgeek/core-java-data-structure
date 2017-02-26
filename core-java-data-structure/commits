@@ -18,6 +18,13 @@
 	-Added the internal method to check the index
 	-Updated JUnit test cases
 	
- 4. JDS_SLL4  …
+ 4. JDS_SLL-4  …
 	-Written unit test cases for the indexOf(), lastIndexOf() and toArray() methods
 	-Apply code clean up and formatter
+
+5.	JDS_SLL-5  …
+	-Fixed the compilation error due to method overloading : The type X is ambiguous in the method for the type Y
+	-Added support for the null addition, removal to/from the list.
+	-Written unit test cases to verify the null addition/removal. 
+	
+	 

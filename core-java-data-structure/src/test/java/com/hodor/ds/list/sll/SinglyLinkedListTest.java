@@ -12,7 +12,9 @@ import com.hodor.ds.list.exceptions.ListEmptyException;
  */
 public class SinglyLinkedListTest {
 
-	private SinglyLinkedList<Integer> mySingleLinkedList;
+	private SinglyLinkedList<Integer> mySinglyLinkedList;
+
+	private SinglyLinkedList<String> myStringSinglyLinkedList;
 
 	private static final String SIZE_MESSAGE = "The SLL size should be ";
 
@@ -26,282 +28,321 @@ public class SinglyLinkedListTest {
 
 	@Before
 	public void setUp() {
-		mySingleLinkedList = new SinglyLinkedList<Integer>();
+		mySinglyLinkedList = new SinglyLinkedList<Integer>();
+		myStringSinglyLinkedList = new SinglyLinkedList<String>();
 	}
 
 	@Test
 	public void testAddElementToSll() {
-		mySingleLinkedList.add(20);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySingleLinkedList.size());
-		mySingleLinkedList.add(30);
-		mySingleLinkedList.add(40);
-		mySingleLinkedList.add(25);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySingleLinkedList.size());
+		mySinglyLinkedList.add(20);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySinglyLinkedList.size());
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
+		mySinglyLinkedList.add(25);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySinglyLinkedList.size());
 
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAddElementAtToSll() {
-		mySingleLinkedList.add(0, 10);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySingleLinkedList.size());
-		mySingleLinkedList.add(1, 20);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySingleLinkedList.size());
-		mySingleLinkedList.add(1, 30);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySingleLinkedList.size());
-		mySingleLinkedList.add(3, 40);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySingleLinkedList.size());
-		mySingleLinkedList.add(0, 5);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 5), 5, mySingleLinkedList.size());
-		mySingleLinkedList.add(3, 35);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, mySingleLinkedList.size());
-		mySingleLinkedList.add(5, 38);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, mySingleLinkedList.size());
-		mySingleLinkedList.add(8, 50);
-		mySingleLinkedList.printList();
+		mySinglyLinkedList.add(0, 10);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySinglyLinkedList.size());
+		mySinglyLinkedList.add(1, 20);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySinglyLinkedList.size());
+		mySinglyLinkedList.add(1, 30);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySinglyLinkedList.size());
+		mySinglyLinkedList.add(3, 40);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySinglyLinkedList.size());
+		mySinglyLinkedList.add(0, 5);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 5), 5, mySinglyLinkedList.size());
+		mySinglyLinkedList.add(3, 35);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, mySinglyLinkedList.size());
+		mySinglyLinkedList.add(5, 38);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, mySinglyLinkedList.size());
+		mySinglyLinkedList.add(8, 50);
+		mySinglyLinkedList.printList();
 	}
 
 	@Test(expected = ListEmptyException.class)
 	public void testGetFirstElement() {
-		mySingleLinkedList.add(10);
-		mySingleLinkedList.add(20);
-		Assert.assertEquals("The first element should be 10", new Integer(10), mySingleLinkedList.getFirst());
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySingleLinkedList.size());
-		mySingleLinkedList.printList();
-		mySingleLinkedList.clear();
-		Assert.assertEquals(getMessage(DELETE_MESSAGE, 10), new Integer(10), mySingleLinkedList.getFirst());
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySingleLinkedList.size());
+		mySinglyLinkedList.add(10);
+		mySinglyLinkedList.add(20);
+		Assert.assertEquals("The first element should be 10", new Integer(10), mySinglyLinkedList.getFirst());
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySinglyLinkedList.size());
+		mySinglyLinkedList.printList();
+		mySinglyLinkedList.clear();
+		Assert.assertEquals(getMessage(DELETE_MESSAGE, 10), new Integer(10), mySinglyLinkedList.getFirst());
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySinglyLinkedList.size());
 	}
 
 	@Test
 	public void testPrintSinglyLinkedList() {
-		mySingleLinkedList.add(10);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(60);
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.add(30);
-		mySingleLinkedList.add(40);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, mySingleLinkedList.size());
-		mySingleLinkedList.printList();
+		mySinglyLinkedList.add(10);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(60);
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, mySinglyLinkedList.size());
+		mySinglyLinkedList.printList();
 	}
 
 	@Test
 	public void testPrintSinglyLinkedListWhenListIsEmpty() {
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 0), 0, mySingleLinkedList.size());
-		mySingleLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 0), 0, mySinglyLinkedList.size());
+		mySinglyLinkedList.printList();
 	}
 
 	@Test(expected = ElementNotFoundException.class)
 	public void testRemoveSpecifiedElement() {
-		mySingleLinkedList.add(10);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(60);
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.add(30);
-		mySingleLinkedList.add(40);
-		mySingleLinkedList.printList();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, mySingleLinkedList.size());
-		boolean result = mySingleLinkedList.remove(new Integer(50));
-		mySingleLinkedList.printList();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 5), 5, mySingleLinkedList.size());
+		mySinglyLinkedList.add(10);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(60);
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
+		mySinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, mySinglyLinkedList.size());
+		boolean result = mySinglyLinkedList.remove(new Integer(50));
+		mySinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 5), 5, mySinglyLinkedList.size());
 		Assert.assertTrue(getMessage(DELETE_MESSAGE, 50), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 50), mySingleLinkedList.contains(50));
-		result = mySingleLinkedList.remove(new Integer(20));
-		mySingleLinkedList.printList();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySingleLinkedList.size());
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 50), mySinglyLinkedList.contains(50));
+		result = mySinglyLinkedList.remove(new Integer(20));
+		mySinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySinglyLinkedList.size());
 		Assert.assertTrue(getMessage(DELETE_MESSAGE, 20), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 20), mySingleLinkedList.contains(20));
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 20), mySinglyLinkedList.contains(20));
 
-		result = mySingleLinkedList.remove(new Integer(30));
-		mySingleLinkedList.printList();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySingleLinkedList.size());
+		result = mySinglyLinkedList.remove(new Integer(30));
+		mySinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySinglyLinkedList.size());
 		Assert.assertTrue(getMessage(DELETE_MESSAGE, 30), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 30), mySingleLinkedList.contains(30));
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 30), mySinglyLinkedList.contains(30));
 
-		result = mySingleLinkedList.remove(new Integer(40));
-		mySingleLinkedList.printList();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySingleLinkedList.size());
+		result = mySinglyLinkedList.remove(new Integer(40));
+		mySinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySinglyLinkedList.size());
 		Assert.assertTrue(getMessage(DELETE_MESSAGE, 40), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 40), mySingleLinkedList.contains(40));
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 40), mySinglyLinkedList.contains(40));
 
-		result = mySingleLinkedList.remove(new Integer(10));
-		mySingleLinkedList.printList();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySingleLinkedList.size());
+		result = mySinglyLinkedList.remove(new Integer(10));
+		mySinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySinglyLinkedList.size());
 		Assert.assertTrue(getMessage(DELETE_MESSAGE, 10), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 10), mySingleLinkedList.contains(10));
-		result = mySingleLinkedList.remove(new Integer(40));
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 10), mySinglyLinkedList.contains(10));
+		result = mySinglyLinkedList.remove(new Integer(40));
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testRemoveElementAt() {
-		mySingleLinkedList.add(10);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(60);
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.add(30);
-		mySingleLinkedList.add(40);
+		mySinglyLinkedList.add(10);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(60);
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
 
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, mySingleLinkedList.size());
-		mySingleLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, mySinglyLinkedList.size());
+		mySinglyLinkedList.printList();
 
-		Integer result = mySingleLinkedList.remove(1);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 5), 5, mySingleLinkedList.size());
+		Integer result = mySinglyLinkedList.remove(1);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 5), 5, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 50), new Integer(50), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 50), mySingleLinkedList.contains(50));
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 50), mySinglyLinkedList.contains(50));
 
-		result = mySingleLinkedList.remove(0);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySingleLinkedList.size());
+		result = mySinglyLinkedList.remove(0);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 10), new Integer(10), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 10), mySingleLinkedList.contains(10));
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 10), mySinglyLinkedList.contains(10));
 
-		result = mySingleLinkedList.remove(3);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySingleLinkedList.size());
+		result = mySinglyLinkedList.remove(3);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 40), new Integer(40), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 40), mySingleLinkedList.contains(40));
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 40), mySinglyLinkedList.contains(40));
 
-		mySingleLinkedList.printList();
-		result = mySingleLinkedList.remove(3);
+		mySinglyLinkedList.printList();
+		result = mySinglyLinkedList.remove(3);
 	}
 
 	@Test(expected = ListEmptyException.class)
 	public void testRemoveFirstElement() {
-		mySingleLinkedList.add(10);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(60);
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySingleLinkedList.size());
-		Integer result = mySingleLinkedList.removeFirst();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySingleLinkedList.size());
+		mySinglyLinkedList.add(10);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(60);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySinglyLinkedList.size());
+		Integer result = mySinglyLinkedList.removeFirst();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 10), new Integer(10), result);
-		result = mySingleLinkedList.removeFirst();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySingleLinkedList.size());
+		result = mySinglyLinkedList.removeFirst();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 50), new Integer(50), result);
-		mySingleLinkedList.printList();
-		result = mySingleLinkedList.removeFirst();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 0), 0, mySingleLinkedList.size());
+		mySinglyLinkedList.printList();
+		result = mySinglyLinkedList.removeFirst();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 0), 0, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 60), new Integer(60), result);
-		System.out.println(mySingleLinkedList.isEmpty());
-		Assert.assertTrue("The list should be empty", mySingleLinkedList.isEmpty());
-		mySingleLinkedList.printList();
-		mySingleLinkedList.removeFirst();
+		System.out.println(mySinglyLinkedList.isEmpty());
+		Assert.assertTrue("The list should be empty", mySinglyLinkedList.isEmpty());
+		mySinglyLinkedList.printList();
+		mySinglyLinkedList.removeFirst();
 	}
 
 	@Test(expected = ListEmptyException.class)
 	public void testRemoveLastElement() {
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.printList();
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.printList();
 
-		Integer result = mySingleLinkedList.removeLast();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 0), 0, mySingleLinkedList.size());
+		Integer result = mySinglyLinkedList.removeLast();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 0), 0, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 20), new Integer(20), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 20), mySingleLinkedList.contains(20));
-		Assert.assertTrue("The list should be empty", mySingleLinkedList.isEmpty());
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 20), mySinglyLinkedList.contains(20));
+		Assert.assertTrue("The list should be empty", mySinglyLinkedList.isEmpty());
 
-		mySingleLinkedList.printList();
-		mySingleLinkedList.add(10);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(60);
-		mySingleLinkedList.printList();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySingleLinkedList.size());
+		mySinglyLinkedList.printList();
+		mySinglyLinkedList.add(10);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(60);
+		mySinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, mySinglyLinkedList.size());
 
-		result = mySingleLinkedList.removeLast();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySingleLinkedList.size());
+		result = mySinglyLinkedList.removeLast();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 60), new Integer(60), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 60), mySingleLinkedList.contains(60));
-		mySingleLinkedList.printList();
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 60), mySinglyLinkedList.contains(60));
+		mySinglyLinkedList.printList();
 
-		result = mySingleLinkedList.removeLast();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySingleLinkedList.size());
+		result = mySinglyLinkedList.removeLast();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 1), 1, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 50), new Integer(50), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 50), mySingleLinkedList.contains(50));
-		mySingleLinkedList.printList();
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 50), mySinglyLinkedList.contains(50));
+		mySinglyLinkedList.printList();
 
-		result = mySingleLinkedList.removeLast();
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 0), 0, mySingleLinkedList.size());
+		result = mySinglyLinkedList.removeLast();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 0), 0, mySinglyLinkedList.size());
 		Assert.assertEquals(getMessage(DELETE_MESSAGE, 10), new Integer(10), result);
-		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 10), mySingleLinkedList.contains(10));
-		Assert.assertTrue("The list should be empty", mySingleLinkedList.isEmpty());
-		mySingleLinkedList.printList();
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, 10), mySinglyLinkedList.contains(10));
+		Assert.assertTrue("The list should be empty", mySinglyLinkedList.isEmpty());
+		mySinglyLinkedList.printList();
 
-		mySingleLinkedList.removeLast();
+		mySinglyLinkedList.removeLast();
 	}
 
 	@Test
 	public void testIndexOf() {
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.add(30);
-		mySingleLinkedList.add(40);
+		mySinglyLinkedList.add(0, null);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
+		mySinglyLinkedList.add(8, null);
 
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, mySingleLinkedList.size());
-		int index = mySingleLinkedList.indexOf(50);
-		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 0), 0, index);
-		index = mySingleLinkedList.indexOf(20);
-		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 3), 3, index);
-		index = mySingleLinkedList.indexOf(40);
-		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 6), 6, index);
-		index = mySingleLinkedList.indexOf(10);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 9), 9, mySinglyLinkedList.size());
+		int index = mySinglyLinkedList.indexOf(50);
+		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 1), 1, index);
+		index = mySinglyLinkedList.indexOf(20);
+		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 4), 4, index);
+		index = mySinglyLinkedList.indexOf(40);
+		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 7), 7, index);
+		index = mySinglyLinkedList.indexOf(null);
+		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, null), 0, index);
+		index = mySinglyLinkedList.indexOf(10);
 		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, -1), -1, index);
-		mySingleLinkedList.printList();
+		mySinglyLinkedList.printList();
 	}
 
 	@Test
 	public void testLastIndexOf() {
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.add(30);
-		mySingleLinkedList.add(40);
+		mySinglyLinkedList.add(null);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
+		mySinglyLinkedList.add(null);
 
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, mySingleLinkedList.size());
-		int index = mySingleLinkedList.lastIndexOf(50);
-		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 2), 2, index);
-		index = mySingleLinkedList.lastIndexOf(20);
-		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 4), 4, index);
-		index = mySingleLinkedList.lastIndexOf(40);
-		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 6), 6, index);
-		index = mySingleLinkedList.lastIndexOf(10);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 9), 9, mySinglyLinkedList.size());
+		int index = mySinglyLinkedList.lastIndexOf(50);
+		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 3), 3, index);
+		index = mySinglyLinkedList.lastIndexOf(20);
+		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 5), 5, index);
+		index = mySinglyLinkedList.lastIndexOf(40);
+		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 7), 7, index);
+		index = mySinglyLinkedList.lastIndexOf(null);
+		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, 8), 8, index);
+		index = mySinglyLinkedList.lastIndexOf(10);
 		Assert.assertEquals(getMessage(INDEX_OF_MESSAGE, -1), -1, index);
-		mySingleLinkedList.printList();
+		mySinglyLinkedList.printList();
 	}
 
 	@Test
 	public void testToObjectArray() {
-		mySingleLinkedList.add(10);
+		mySinglyLinkedList.add(10);
 
-		Object[] actualObjectArray = mySingleLinkedList.toArray();
+		Object[] actualObjectArray = mySinglyLinkedList.toArray();
 
 		Assert.assertEquals(getMessage(SIZE_MESSAGE, actualObjectArray.length), actualObjectArray.length,
-				mySingleLinkedList.size());
+				mySinglyLinkedList.size());
 
 		Object expectedObjectArray[] = new Object[] { 10 };
 		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
 				actualObjectArray);
 
-		mySingleLinkedList.add(20);
-		mySingleLinkedList.add(30);
-		mySingleLinkedList.add(40);
-		mySingleLinkedList.add(50);
-		mySingleLinkedList.add(60);
-		mySingleLinkedList.add(70);
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
+		mySinglyLinkedList.add(50);
+		mySinglyLinkedList.add(60);
+		mySinglyLinkedList.add(70);
+		mySinglyLinkedList.add(null);
+		mySinglyLinkedList.addFirst(null);
 
-		actualObjectArray = mySingleLinkedList.toArray();
+		actualObjectArray = mySinglyLinkedList.toArray();
 
 		Assert.assertEquals(getMessage(SIZE_MESSAGE, actualObjectArray.length), actualObjectArray.length,
-				mySingleLinkedList.size());
+				mySinglyLinkedList.size());
 
-		expectedObjectArray = new Object[] { 10, 20, 30, 40, 50, 60, 70 };
+		expectedObjectArray = new Object[] { null, 10, 20, 30, 40, 50, 60, 70, null };
 		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
 				actualObjectArray);
 
-		mySingleLinkedList.clear();
-		actualObjectArray = mySingleLinkedList.toArray();
-		expectedObjectArray = new Object[mySingleLinkedList.size()];
+		mySinglyLinkedList.clear();
+		actualObjectArray = mySinglyLinkedList.toArray();
+		expectedObjectArray = new Object[mySinglyLinkedList.size()];
 		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
 				actualObjectArray);
+	}
+
+	@Test
+	public void testSLLOperationsForNullValue() {
+		myStringSinglyLinkedList.add("john");
+		myStringSinglyLinkedList.add(null);
+		myStringSinglyLinkedList.addFirst("brayan");
+		myStringSinglyLinkedList.addFirst(null);
+		myStringSinglyLinkedList.add(0, "sham");
+		myStringSinglyLinkedList.add(1, null);
+		myStringSinglyLinkedList.addFirst(null);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, myStringSinglyLinkedList.size());
+		String result = myStringSinglyLinkedList.removeFirst();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, myStringSinglyLinkedList.size());
+		Assert.assertEquals(getMessage(DELETE_MESSAGE, null), null, result);
+		result = myStringSinglyLinkedList.removeLast();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 5), 5, myStringSinglyLinkedList.size());
+		Assert.assertEquals(getMessage(DELETE_MESSAGE, null), null, result);
+		boolean isRemoved = myStringSinglyLinkedList.remove(null);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, myStringSinglyLinkedList.size());
+		Assert.assertTrue(getMessage(DELETE_MESSAGE, null), isRemoved);
+		result = myStringSinglyLinkedList.remove(1);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 3), 3, myStringSinglyLinkedList.size());
+		Assert.assertTrue(getMessage(DELETE_MESSAGE, null), isRemoved);
+		myStringSinglyLinkedList.printList();
+		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, null), myStringSinglyLinkedList.contains(null));
+
+		myStringSinglyLinkedList.printList();
 	}
 
 	private String getMessage(final String message, final Object object) {
