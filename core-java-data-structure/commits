@@ -1,0 +1,23 @@
+/**
+ * JDS_SLL : Implementation of the Single Linked List(SLL) using core java
+ * 
+ *
+ */
+ 
+ 1. JDS_SLL-1  …
+	-Created the maven project for exploring the data structures
+	-Implementation of the Singly linked list.
+	-Added the junit test cases to test various operations/methods for the SLL.
+
+ 2.	JDS_SLL-2  …
+	Fixed the unit test compilation failed by updating junit version to 4+ in the POM 
+
+ 3. JDS_SLL-3  …
+	-Fixed the removeLast() method logic
+	-Added implementation for the remove element by index
+	-Added the internal method to check the index
+	-Updated JUnit test cases
+	
+ 4. JDS_SLL4  …
+	-Written unit test cases for the indexOf(), lastIndexOf() and toArray() methods
+	-Apply code clean up and formatter
