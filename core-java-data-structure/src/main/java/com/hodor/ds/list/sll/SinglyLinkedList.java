@@ -83,14 +83,14 @@ public class SinglyLinkedList<T> implements List<T> {
 	}
 
 	public void add(int index, T element) {
-		checkIndex(index);
+		checkPositionIndex(index);
 		if (index == 0) {
 			addFirst(element);
 		} else if (index == size) {
 			addLast(element);
 		} else {
 			Node<T> xNode, tempNode, newNode;
-			tempNode = getNode(index - 1);
+			tempNode = getNodeByIndex(index - 1);
 			xNode = tempNode.next;
 			newNode = new Node<T>(element, xNode);
 			tempNode.next = newNode;
@@ -115,7 +115,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		} else {
 			// TODO:Need to implement/revisit this logic later
 			Node<T> xNode, tempNode, newNode = null;
-			tempNode = getNode(index - 1);
+			tempNode = getNodeByIndex(index - 1);
 			xNode = tempNode.next;
 			for (T element : elements) {
 				newNode = new Node<T>(element, xNode);
@@ -173,6 +173,7 @@ public class SinglyLinkedList<T> implements List<T> {
 
 				final Node<T> nodeBeforeElement = getNodeBeforeElement(element);
 				if (nodeBeforeElement != null) {
+					System.out.println("The node before element is : " + nodeBeforeElement.value);
 					found = true;
 					Node<T> nodeToBeRemoved = nodeBeforeElement.next;
 					final Node<T> nodeAfterElement = nodeToBeRemoved.next;
@@ -207,28 +208,47 @@ public class SinglyLinkedList<T> implements List<T> {
 		T element = null;
 
 		if (!isEmpty()) {
-			Node<T> nodeBeforeRemovedNode = first;
-			while (nodeBeforeRemovedNode.next != null) {
-				nodeBeforeRemovedNode = nodeBeforeRemovedNode.next;
+			Node<T> nodeBeforeLastNode = first;
+			Node<T> tempNode = first;
+			while (tempNode.next != null) {
+				nodeBeforeLastNode = tempNode;
+				tempNode = tempNode.next;
 			}
-			Node<T> nodeToBeRemoved = last;
-			last = nodeBeforeRemovedNode;
+			final Node<T> nodeToBeRemoved = last;
 			element = nodeToBeRemoved.value;
+			nodeToBeRemoved.next = null;
+			nodeToBeRemoved.value = null;
+			last = nodeBeforeLastNode;
+			last.next = null;
 			size--;
-			nodeToBeRemoved = null;
+		} else {
+			throw new ListEmptyException("Empty list, size : " + size);
 		}
-
 		return element;
 	}
 
 	public T remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		checkElementIndex(index);
+		T removedElement = null;
+		if (index == 0) {
+			removedElement = removeFirst();
+		} else if (index == size - 1) {
+			removedElement = removeLast();
+		} else {
+			final Node<T> nodeBeforeRemovedNode = getNodeByIndex(index - 1);
+			final Node<T> nodeToBeRemoved = nodeBeforeRemovedNode.next;
+			final Node<T> nodeAfterRemovedNode = nodeToBeRemoved.next;
+			nodeBeforeRemovedNode.next = nodeAfterRemovedNode;
+			removedElement = nodeToBeRemoved.value;
+			nodeToBeRemoved.next = null;
+			nodeToBeRemoved.value = null;
+			size--;
+		}
+		return removedElement;
 	}
 
 	public void reverse() {
 		// TODO Auto-generated method stub
-
 	}
 
 	public List<T> reverseList() {
@@ -267,7 +287,7 @@ public class SinglyLinkedList<T> implements List<T> {
 	}
 
 	public T get(int index) {
-		Node<T> tempNode = getNode(index);
+		Node<T> tempNode = getNodeByIndex(index);
 		return tempNode.value;
 	}
 
@@ -312,14 +332,33 @@ public class SinglyLinkedList<T> implements List<T> {
 		return objArr;
 	}
 
-	private void checkIndex(int index) {
-		if (index < 0 || index > size) {
+	/**
+	 * Tells if the argument is the index of an existing element.
+	 */
+	private boolean isElementIndex(int index) {
+		return index >= 0 && index < size;
+	}
+
+	/**
+	 * Tells if the argument is the index of a valid position for an iterator or
+	 * an add operation.
+	 */
+	private boolean isPositionIndex(int index) {
+		return index >= 0 && index <= size;
+	}
+
+	private void checkElementIndex(int index) {
+		if (!isElementIndex(index))
 			throw new IndexOutOfBoundsException(getIndexMessage(index));
-		}
+	}
+
+	private void checkPositionIndex(int index) {
+		if (!isPositionIndex(index))
+			throw new IndexOutOfBoundsException(getIndexMessage(index));
 	}
 
 	private String getIndexMessage(int index) {
-		return new StringBuilder("index = ").append(index).append(", size = ").append(size).toString();
+		return new StringBuilder("index : ").append(index).append(", size : ").append(size).toString();
 	}
 
 	private void addNodeInEmptyList(T element) {
@@ -328,8 +367,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		size++;
 	}
 
-	private Node<T> getNode(int index) {
-		checkIndex(index);
+	private Node<T> getNodeByIndex(final int index) {
 		Node<T> tempNode = first;
 		for (int i = 0; i < index; i++) {
 			tempNode = tempNode.next;
@@ -339,14 +377,18 @@ public class SinglyLinkedList<T> implements List<T> {
 
 	private Node<T> getNodeBeforeElement(final T element) {
 		Node<T> nodeBeforeElement = null;
+		boolean found = false;
 		if (!isEmpty()) {
-			// Node<T> tempNode = first;
 			for (Node<T> tempNode = first; tempNode.next != null; tempNode = tempNode.next) {
 				if (element.equals(tempNode.value)) {
-					nodeBeforeElement = tempNode;
+					found = true;
 					break;
 				}
+				nodeBeforeElement = tempNode;
 			}
+		}
+		if (!found) {
+			nodeBeforeElement = null;
 		}
 		return nodeBeforeElement;
 	}
