@@ -28,7 +28,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		public Node() {
 		}
 
-		public Node(T value, Node<T> next) {
+		public Node(final T value, final Node<T> next) {
 			this.value = value;
 			this.next = next;
 		}
@@ -55,25 +55,25 @@ public class SinglyLinkedList<T> implements List<T> {
 		// default constructor
 	}
 
-	public void add(T element) {
+	public void add(final T element) {
 		addLast(element);
 	}
 
-	public void addFirst(T element) {
+	public void addFirst(final T element) {
 		if (isEmpty()) {
 			addNodeInEmptyList(element);
 		} else {
-			Node<T> newNode = new Node<T>(element, first);
+			final Node<T> newNode = new Node<T>(element, first);
 			first = newNode;
 			size++;
 		}
 	}
 
-	public void addLast(T element) {
+	public void addLast(final T element) {
 		if (isEmpty()) {
 			addNodeInEmptyList(element);
 		} else {
-			Node<T> newNode = new Node<T>();
+			final Node<T> newNode = new Node<T>();
 			newNode.value = element;
 			newNode.next = null;
 			last.next = newNode;
@@ -82,7 +82,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
-	public void add(int index, T element) {
+	public void add(final int index, final T element) {
 		checkPositionIndex(index);
 		if (index == 0) {
 			addFirst(element);
@@ -94,22 +94,21 @@ public class SinglyLinkedList<T> implements List<T> {
 			xNode = tempNode.next;
 			newNode = new Node<T>(element, xNode);
 			tempNode.next = newNode;
-
 			size++;
 		}
 	}
 
-	public void add(T... elements) {
-		for (T temp : elements) {
+	public void add(final T... elements) {
+		for (final T temp : elements) {
 			addLast(temp);
 		}
 	}
 
-	public void add(int index, T... elements) {
+	public void add(final int index, final T... elements) {
 		if (elements == null || elements.length == 0) {
 			return;
 		} else if (index == 0 || index == size) {
-			for (T temp : elements) {
+			for (final T temp : elements) {
 				add(index, temp);
 			}
 		} else {
@@ -117,7 +116,7 @@ public class SinglyLinkedList<T> implements List<T> {
 			Node<T> xNode, tempNode, newNode = null;
 			tempNode = getNodeByIndex(index - 1);
 			xNode = tempNode.next;
-			for (T element : elements) {
+			for (final T element : elements) {
 				newNode = new Node<T>(element, xNode);
 			}
 			tempNode.next = newNode;
@@ -160,7 +159,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
-	public boolean remove(T element) throws ElementNotFoundException {
+	public boolean remove(final T element) throws ElementNotFoundException {
 		boolean found = false;
 		if (!isEmpty()) {
 			if (element.equals(first.value)) {
@@ -227,7 +226,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		return element;
 	}
 
-	public T remove(int index) {
+	public T remove(final int index) {
 		checkElementIndex(index);
 		T removedElement = null;
 		if (index == 0) {
@@ -256,7 +255,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		return null;
 	}
 
-	public T set(int index, T newElement) throws ElementNotFoundException {
+	public T set(final int index, final T newElement) throws ElementNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -265,11 +264,11 @@ public class SinglyLinkedList<T> implements List<T> {
 		return first == null || last == null || size == 0;
 	}
 
-	public boolean contains(T element) {
+	public boolean contains(final T element) {
 		return indexOf(element) != -1;
 	}
 
-	public int indexOf(T element) {
+	public int indexOf(final T element) {
 		int indexOfFirstOcuurenceOfElement = -1;
 		if (!isEmpty()) {
 			Node<T> tempNode = first;
@@ -286,8 +285,9 @@ public class SinglyLinkedList<T> implements List<T> {
 		return indexOfFirstOcuurenceOfElement;
 	}
 
-	public T get(int index) {
-		Node<T> tempNode = getNodeByIndex(index);
+	public T get(final int index) {
+		checkElementIndex(index);
+		final Node<T> tempNode = getNodeByIndex(index);
 		return tempNode.value;
 	}
 
@@ -305,7 +305,7 @@ public class SinglyLinkedList<T> implements List<T> {
 		return last.value;
 	}
 
-	public int lastIndexOf(T element) {
+	public int lastIndexOf(final T element) {
 		int indexOfLastOcuurenceOfElement = -1;
 		if (!isEmpty()) {
 			Node<T> tempNode = first;
@@ -322,12 +322,14 @@ public class SinglyLinkedList<T> implements List<T> {
 	}
 
 	public Object[] toArray() {
-		Object[] objArr = new Object[size];
+		final Object[] objArr = new Object[size];
 		if (!isEmpty()) {
 			int i = -1;
-			for (Node<T> pNode = first; pNode.next != null; pNode = pNode.next) {
+			Node<T> pNode = first;
+			for (; pNode.next != null; pNode = pNode.next) {
 				objArr[++i] = pNode.value;
 			}
+			objArr[++i] = pNode.value;
 		}
 		return objArr;
 	}
@@ -335,7 +337,7 @@ public class SinglyLinkedList<T> implements List<T> {
 	/**
 	 * Tells if the argument is the index of an existing element.
 	 */
-	private boolean isElementIndex(int index) {
+	private boolean isElementIndex(final int index) {
 		return index >= 0 && index < size;
 	}
 
@@ -343,26 +345,26 @@ public class SinglyLinkedList<T> implements List<T> {
 	 * Tells if the argument is the index of a valid position for an iterator or
 	 * an add operation.
 	 */
-	private boolean isPositionIndex(int index) {
+	private boolean isPositionIndex(final int index) {
 		return index >= 0 && index <= size;
 	}
 
-	private void checkElementIndex(int index) {
+	private void checkElementIndex(final int index) {
 		if (!isElementIndex(index))
 			throw new IndexOutOfBoundsException(getIndexMessage(index));
 	}
 
-	private void checkPositionIndex(int index) {
+	private void checkPositionIndex(final int index) {
 		if (!isPositionIndex(index))
 			throw new IndexOutOfBoundsException(getIndexMessage(index));
 	}
 
-	private String getIndexMessage(int index) {
+	private String getIndexMessage(final int index) {
 		return new StringBuilder("index : ").append(index).append(", size : ").append(size).toString();
 	}
 
-	private void addNodeInEmptyList(T element) {
-		Node<T> newNode = new Node<T>(element, null);
+	private void addNodeInEmptyList(final T element) {
+		final Node<T> newNode = new Node<T>(element, null);
 		first = last = newNode;
 		size++;
 	}
