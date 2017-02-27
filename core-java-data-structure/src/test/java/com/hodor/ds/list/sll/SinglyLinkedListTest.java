@@ -26,6 +26,12 @@ public class SinglyLinkedListTest {
 
 	private static final String TO_ARRAY_MESSAGE = "The elements should be ";
 
+	private static final String GET_ELEMENT_MESSAGE = "The retrived element should be ";
+
+	private static final String REPLACED_ELEMENT_MESSAGE = "The replaced element must be ";
+
+	// private static final String REVERSED_LIST = "After reversal list should be ";
+
 	@Before
 	public void setUp() {
 		mySinglyLinkedList = new SinglyLinkedList<Integer>();
@@ -343,6 +349,77 @@ public class SinglyLinkedListTest {
 		Assert.assertFalse(getMessage(CONTAINS_MESSAGE, null), myStringSinglyLinkedList.contains(null));
 
 		myStringSinglyLinkedList.printList();
+	}
+
+	@Test
+	public void testGetElementByIndex() {
+		myStringSinglyLinkedList.add("john");
+		myStringSinglyLinkedList.add(null);
+		myStringSinglyLinkedList.addFirst("brayan");
+		myStringSinglyLinkedList.addFirst(null);
+		myStringSinglyLinkedList.add(0, "sham");
+		myStringSinglyLinkedList.add(1, null);
+		myStringSinglyLinkedList.addFirst(null);
+		myStringSinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, myStringSinglyLinkedList.size());
+		String actualResult = myStringSinglyLinkedList.get(0);
+		Assert.assertEquals(getMessage(GET_ELEMENT_MESSAGE, null), null, actualResult);
+		actualResult = myStringSinglyLinkedList.get(2);
+		Assert.assertEquals(getMessage(GET_ELEMENT_MESSAGE, null), null, actualResult);
+		actualResult = myStringSinglyLinkedList.get(5);
+		Assert.assertEquals(getMessage(GET_ELEMENT_MESSAGE, "john"), "john", actualResult);
+	}
+
+	@Test
+	public void testSetElementToIndex() {
+		myStringSinglyLinkedList.add("john");
+		myStringSinglyLinkedList.add(null);
+		myStringSinglyLinkedList.addFirst("brayan");
+		myStringSinglyLinkedList.addFirst(null);
+		myStringSinglyLinkedList.add(0, "sham");
+		myStringSinglyLinkedList.add(1, null);
+		myStringSinglyLinkedList.addFirst(null);
+
+		myStringSinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, myStringSinglyLinkedList.size());
+		String replacedElement = myStringSinglyLinkedList.set(0, "sansa");
+		Assert.assertEquals(getMessage(REPLACED_ELEMENT_MESSAGE, replacedElement), null, replacedElement);
+
+		replacedElement = myStringSinglyLinkedList.set(2, "arya");
+		Assert.assertEquals(REPLACED_ELEMENT_MESSAGE, null, replacedElement);
+		myStringSinglyLinkedList.printList();
+
+		replacedElement = myStringSinglyLinkedList.set(3, "cersi");
+		Assert.assertEquals(REPLACED_ELEMENT_MESSAGE, null, replacedElement);
+
+		replacedElement = myStringSinglyLinkedList.set(6, "Tyrwin");
+		Assert.assertEquals(REPLACED_ELEMENT_MESSAGE, null, replacedElement);
+		Assert.assertFalse(CONTAINS_MESSAGE, myStringSinglyLinkedList.contains(null));
+		myStringSinglyLinkedList.printList();
+	}
+
+	@Test
+	public void testReverse() {
+		myStringSinglyLinkedList.reverse();
+
+		myStringSinglyLinkedList.add("john");
+		myStringSinglyLinkedList.reverse();
+		Assert.assertEquals("john", myStringSinglyLinkedList.getFirst());
+		Assert.assertEquals("john", myStringSinglyLinkedList.getLast());
+
+		myStringSinglyLinkedList.addFirst("brayan");
+		myStringSinglyLinkedList.add(0, "sham");
+		myStringSinglyLinkedList.add(1, "sansa");
+		myStringSinglyLinkedList.addFirst("arya");
+		myStringSinglyLinkedList.printList();
+		Assert.assertEquals("arya", myStringSinglyLinkedList.getFirst());
+		Assert.assertEquals("john", myStringSinglyLinkedList.getLast());
+
+		myStringSinglyLinkedList.reverse();
+		myStringSinglyLinkedList.printList();
+		Assert.assertEquals("john", myStringSinglyLinkedList.getFirst());
+		Assert.assertEquals("arya", myStringSinglyLinkedList.getLast());
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, myStringSinglyLinkedList.size());
 	}
 
 	private String getMessage(final String message, final Object object) {

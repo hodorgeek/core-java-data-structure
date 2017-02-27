@@ -261,11 +261,41 @@ public class SinglyLinkedList<T> implements List<T> {
 		return removedElement;
 	}
 
+	/**
+	 * reverse() method is used to reversed the given singly linked list. AFter
+	 * reversal it does not returned the new list.
+	 */
 	@Override
 	public void reverse() {
-		// TODO Auto-generated method stub
+		// 1. if the list is empty or the list contains single element
+		if (isEmpty() || size == 1) {
+			return;
+		} else {
+			// 2. If the list contains more than one elements
+			Node<T> p, q, r;
+			p = r = null;
+			q = first;
+			while (q.next != null) {
+				r = q.next;
+				q.next = p;
+				r.next = q;
+				p = q;
+				q = r;
+				q = q.next;
+			}
+
+			Node<T> tempNode = first;
+			first = last;
+			last = tempNode;
+		}
+
 	}
 
+	/**
+	 * reverseList() method is used to reversed the given singly linked list.
+	 * After reversal it is returning the new list and keep the existing list
+	 * intact.
+	 */
 	@Override
 	public List<T> reverseList() {
 		// TODO Auto-generated method stub
@@ -273,9 +303,12 @@ public class SinglyLinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public T set(final int index, final T newElement) throws ElementNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+	public T set(final int index, final T newElement) {
+		checkElementIndex(index);
+		final Node<T> nodeToBeReplaced = getNodeByIndex(index);
+		final T replacedElement = nodeToBeReplaced.value;
+		nodeToBeReplaced.value = newElement;
+		return replacedElement;
 	}
 
 	@Override

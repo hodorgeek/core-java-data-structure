@@ -16,7 +16,7 @@ public interface List<T> {
 
 	public void addElements(int index, T... elements);
 
-	public boolean remove(T element) throws ElementNotFoundException;
+	public boolean remove(T element);
 
 	public T removeFirst();
 
