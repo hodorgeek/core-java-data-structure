@@ -272,23 +272,19 @@ public class SinglyLinkedList<T> implements List<T> {
 			return;
 		} else {
 			// 2. If the list contains more than one elements
-			Node<T> p, q, r;
+			Node<T> p, q, r, h;
 			p = r = null;
-			q = first;
+			q = h = first;
 			while (q.next != null) {
 				r = q.next;
 				q.next = p;
-				r.next = q;
 				p = q;
 				q = r;
-				q = q.next;
 			}
-
-			Node<T> tempNode = first;
+			last.next = p; /// or q.next = p;
 			first = last;
-			last = tempNode;
+			last = h;
 		}
-
 	}
 
 	/**

@@ -30,8 +30,6 @@ public class SinglyLinkedListTest {
 
 	private static final String REPLACED_ELEMENT_MESSAGE = "The replaced element must be ";
 
-	// private static final String REVERSED_LIST = "After reversal list should be ";
-
 	@Before
 	public void setUp() {
 		mySinglyLinkedList = new SinglyLinkedList<Integer>();
@@ -419,7 +417,19 @@ public class SinglyLinkedListTest {
 		myStringSinglyLinkedList.printList();
 		Assert.assertEquals("john", myStringSinglyLinkedList.getFirst());
 		Assert.assertEquals("arya", myStringSinglyLinkedList.getLast());
-		Assert.assertEquals(getMessage(SIZE_MESSAGE, 7), 7, myStringSinglyLinkedList.size());
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 5), 5, myStringSinglyLinkedList.size());
+
+		myStringSinglyLinkedList.clear();
+		myStringSinglyLinkedList.add("jemmi");
+		myStringSinglyLinkedList.add("theon");
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, myStringSinglyLinkedList.size());
+		Assert.assertEquals("jemmi", myStringSinglyLinkedList.getFirst());
+		Assert.assertEquals("theon", myStringSinglyLinkedList.getLast());
+		myStringSinglyLinkedList.printList();
+		myStringSinglyLinkedList.reverse();
+		myStringSinglyLinkedList.printList();
+		Assert.assertEquals("theon", myStringSinglyLinkedList.getFirst());
+		Assert.assertEquals("jemmi", myStringSinglyLinkedList.getLast());
 	}
 
 	private String getMessage(final String message, final Object object) {
