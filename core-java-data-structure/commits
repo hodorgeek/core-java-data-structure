@@ -32,6 +32,9 @@
 	 
  7. JDS_SLL-7  …
 	-Fixed the reverse() method
+	
+8.  JDS_SLL-8  …
+    -Added the implementation for reverseList() method along with the junit test cases
 	 
 	 
 	 

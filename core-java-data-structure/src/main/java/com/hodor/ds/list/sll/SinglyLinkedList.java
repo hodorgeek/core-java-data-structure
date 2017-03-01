@@ -294,8 +294,16 @@ public class SinglyLinkedList<T> implements List<T> {
 	 */
 	@Override
 	public List<T> reverseList() {
-		// TODO Auto-generated method stub
-		return null;
+		final List<T> reverseList = new SinglyLinkedList<>();
+		if (!isEmpty()) {
+			Node<T> tempNode = first;
+			while (tempNode.next != null) {
+				reverseList.addFirst(tempNode.value);
+				tempNode = tempNode.next;
+			}
+			reverseList.addFirst(tempNode.value);
+		}
+		return reverseList;
 	}
 
 	@Override

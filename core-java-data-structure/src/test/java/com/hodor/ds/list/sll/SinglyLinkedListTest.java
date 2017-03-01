@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.hodor.ds.list.List;
 import com.hodor.ds.list.exceptions.ElementNotFoundException;
 import com.hodor.ds.list.exceptions.ListEmptyException;
 
@@ -430,6 +431,50 @@ public class SinglyLinkedListTest {
 		myStringSinglyLinkedList.printList();
 		Assert.assertEquals("theon", myStringSinglyLinkedList.getFirst());
 		Assert.assertEquals("jemmi", myStringSinglyLinkedList.getLast());
+	}
+
+	@Test
+	public void testReverseList() {
+		Object[] expectedObjectArray = new Object[mySinglyLinkedList.size()];
+
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, expectedObjectArray.length), expectedObjectArray.length,
+				mySinglyLinkedList.size());
+		// Test case 1 : When the list is empty
+		List<Integer> reverseList = mySinglyLinkedList.reverseList();
+		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
+				reverseList.toArray());
+
+		mySinglyLinkedList.add(10);
+
+		expectedObjectArray = new Object[] { 10 };
+
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, expectedObjectArray.length), expectedObjectArray.length,
+				mySinglyLinkedList.size());
+		// Test case 2 : When the list contains only one element
+		reverseList = mySinglyLinkedList.reverseList();
+		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
+				reverseList.toArray());
+		Assert.assertEquals(new Integer(10), reverseList.getFirst());
+		Assert.assertEquals(new Integer(10), reverseList.getLast());
+
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
+		mySinglyLinkedList.add(50);
+
+		expectedObjectArray = new Object[] { 50, 40, 30, 20, 10 };
+
+		Assert.assertEquals(new Integer(10), mySinglyLinkedList.getFirst());
+		Assert.assertEquals(new Integer(50), mySinglyLinkedList.getLast());
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, expectedObjectArray.length), expectedObjectArray.length,
+				mySinglyLinkedList.size());
+
+		// Test case 3 : When the list contains more than one elements
+		reverseList = mySinglyLinkedList.reverseList();
+		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
+				reverseList.toArray());
+		Assert.assertEquals(new Integer(50), reverseList.getFirst());
+		Assert.assertEquals(new Integer(10), reverseList.getLast());
 	}
 
 	private String getMessage(final String message, final Object object) {
