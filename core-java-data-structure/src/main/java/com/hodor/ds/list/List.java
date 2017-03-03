@@ -12,9 +12,9 @@ public interface List<T> {
 
 	public void add(int position, T Element);
 
-	public void addElements(T... elements);
+	public void addAll(T... elements);
 
-	public void addElements(int index, T... elements);
+	public void addAll(int index, T... elements);
 
 	public boolean remove(T element);
 

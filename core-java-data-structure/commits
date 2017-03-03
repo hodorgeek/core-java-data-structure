@@ -35,6 +35,14 @@
 	
 8.  JDS_SLL-8  …
     -Added the implementation for reverseList() method along with the junit test cases
+    
+9.  JDS_SLL-9  …
+	-Renamed addElements() methods to addAll()
+	-Written junit test cases to test the addAll() methods
+	-Added implementation for the addAll() methods
+    
+    
+    
 	 
 	 
 	 

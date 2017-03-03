@@ -47,7 +47,7 @@ public class SinglyLinkedList<T> implements List<T> {
 	/**
 	 * It is used to keep the track to size of the linked list. After adding or
 	 * removing each node to/from the list this variable get increment or
-	 * decrement
+	 * decrement respectively.
 	 */
 	private int size;
 
@@ -102,34 +102,49 @@ public class SinglyLinkedList<T> implements List<T> {
 		}
 	}
 
+	/**
+	 * addAll() is used to add the collection of elements to the end of the
+	 * singly linked list
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void addElements(final T... elements) {
+	public void addAll(final T... elements) {
 		for (final T temp : elements) {
 			addLast(temp);
 		}
 	}
 
+	/**
+	 * addAll(index, T) is used to add the collection of elements at specified
+	 * index in the singly linked list. The index specified is inclusive in the
+	 * list.
+	 * 
+	 * If the index specified does not fall in the list, then it will throw the
+	 * <code>IndexOutOfBoundsException</code>
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void addElements(final int index, final T... elements) {
+	public void addAll(final int index, final T... elements) {
+		checkPositionIndex(index);
 		if (elements == null || elements.length == 0) {
 			return;
-		} else if (index == 0 || index == size) {
-			for (final T temp : elements) {
-				add(index, temp);
+		} else if ((isEmpty() && index == 0) || index == size) {
+			addAll(elements);
+		} else if (index == 0) {
+			for (int i = elements.length - 1; i >= 0; i--) {
+				addFirst(elements[i]);
 			}
 		} else {
-			// TODO:Need to implement/revisit this logic later
 			Node<T> xNode, tempNode, newNode = null;
 			tempNode = getNodeByIndex(index - 1);
 			xNode = tempNode.next;
 			for (final T element : elements) {
-				newNode = new Node<T>(element, xNode);
+				newNode = new Node<T>(element, null);
+				tempNode.next = newNode;
+				tempNode = newNode;
+				size++;
 			}
-			tempNode.next = newNode;
-
-			size++;
+			tempNode.next = xNode;
 		}
 	}
 
@@ -412,15 +427,16 @@ public class SinglyLinkedList<T> implements List<T> {
 	}
 
 	/**
-	 * Tells if the argument is the index of an existing element.
+	 * Tells if the argument is the index of an existing element for remove
+	 * operation.
 	 */
 	private boolean isElementIndex(final int index) {
 		return index >= 0 && index < size;
 	}
 
 	/**
-	 * Tells if the argument is the index of a valid position for an iterator or
-	 * an add operation.
+	 * Tells if the argument is the index of a valid position for an add
+	 * operation.
 	 */
 	private boolean isPositionIndex(final int index) {
 		return index >= 0 && index <= size;
