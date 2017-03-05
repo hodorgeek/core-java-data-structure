@@ -103,28 +103,26 @@ public class SinglyLinkedList<T> implements List<T> {
 	}
 
 	/**
-	 * addAll() is used to add the collection of elements to the end of the
+	 * addAll(T[]) is used to add the collection of elements to the end of the
 	 * singly linked list
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public void addAll(final T... elements) {
+	public void addAll(final T[] elements) {
 		for (final T temp : elements) {
 			addLast(temp);
 		}
 	}
 
 	/**
-	 * addAll(index, T) is used to add the collection of elements at specified
+	 * addAll(index, T[]) is used to add the collection of elements at specified
 	 * index in the singly linked list. The index specified is inclusive in the
 	 * list.
 	 * 
-	 * If the index specified does not fall in the list, then it will throw the
-	 * <code>IndexOutOfBoundsException</code>
+	 * If the index specified does not fall in the list size, then it will throw
+	 * the <code>IndexOutOfBoundsException</code>
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public void addAll(final int index, final T... elements) {
+	public void addAll(final int index, final T[] elements) {
 		checkPositionIndex(index);
 		if (elements == null || elements.length == 0) {
 			return;
@@ -146,6 +144,32 @@ public class SinglyLinkedList<T> implements List<T> {
 			}
 			tempNode.next = xNode;
 		}
+	}
+
+	/**
+	 * addAll(list) is used to add the another list of elements to the end of
+	 * this singly linked list
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void addAll(final List<T> list) {
+		final T[] objArr = (T[]) list.toArray();
+		this.addAll(objArr);
+	}
+
+	/**
+	 * addAll(index, list) is used to merge the list of elements at specified
+	 * index in this singly linked list. The index specified is inclusive in
+	 * this list.
+	 * 
+	 * If the index specified does not fall in current list size, then it will
+	 * throw the <code>IndexOutOfBoundsException</code>
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void addAll(final int index, final List<T> list) {
+		final T[] objArr = (T[]) list.toArray();
+		this.addAll(index, objArr);
 	}
 
 	@Override
@@ -424,6 +448,25 @@ public class SinglyLinkedList<T> implements List<T> {
 			objArr[++i] = pNode.value;
 		}
 		return objArr;
+	}
+
+	@Override
+	public boolean equals(final List<T> list) {
+		boolean isEquals = true;
+		if (this.isEmpty() && list.isEmpty()) {
+			isEquals = true;
+		} else {
+			if (this != null && list != null && this.size == list.size()) {
+				// isEquals = Arrays.deepEquals(this.toArray(), list.toArray());
+				for (int i = 0; i < list.size(); i++) {
+					if (this.get(i) != list.get(i)) {
+						isEquals = false;
+						break;
+					}
+				}
+			}
+		}
+		return isEquals;
 	}
 
 	/**

@@ -12,9 +12,13 @@ public interface List<T> {
 
 	public void add(int position, T Element);
 
-	public void addAll(T... elements);
+	public void addAll(T[] elements);
 
-	public void addAll(int index, T... elements);
+	public void addAll(int index, T[] elements);
+
+	public void addAll(List<T> list);
+
+	public void addAll(int index, List<T> list);
 
 	public boolean remove(T element);
 
@@ -51,4 +55,6 @@ public interface List<T> {
 	public int size();
 
 	public Object[] toArray();
+
+	public boolean equals(List<T> list);
 }

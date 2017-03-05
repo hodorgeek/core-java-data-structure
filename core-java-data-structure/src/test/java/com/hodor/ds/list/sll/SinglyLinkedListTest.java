@@ -570,6 +570,78 @@ public class SinglyLinkedListTest {
 		Assert.assertEquals("ned", myStringSinglyLinkedList.getLast());
 	}
 
+	@Test
+	public void testEquals() {
+		final List<Integer> list1 = new SinglyLinkedList<>();
+		Assert.assertTrue(mySinglyLinkedList.equals(list1));
+		mySinglyLinkedList.add(10);
+		list1.add(10);
+		Assert.assertTrue(mySinglyLinkedList.equals(list1));
+		mySinglyLinkedList.add(20);
+		mySinglyLinkedList.add(30);
+		mySinglyLinkedList.add(40);
+		list1.add(20);
+		list1.add(30);
+		list1.add(40);
+		Assert.assertTrue(mySinglyLinkedList.equals(list1));
+	}
+
+	@Test
+	public void testAddAllList() {
+		// Test Case 1 : When the list is empty
+		List<String> list1 = new SinglyLinkedList<>();
+		list1.add("jemmie");
+		list1.add("robert");
+		myStringSinglyLinkedList.addAll(list1);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 2), 2, myStringSinglyLinkedList.size());
+		Assert.assertEquals("jemmie", myStringSinglyLinkedList.getFirst());
+		Assert.assertEquals("robert", myStringSinglyLinkedList.getLast());
+		Assert.assertTrue(myStringSinglyLinkedList.equals(list1));
+
+		// Test Case 2 : When the list contains single element
+		mySinglyLinkedList.add(10);
+		List<Integer> list2 = new SinglyLinkedList<>();
+		list2.add(20);
+		list2.add(30);
+		list2.add(40);
+		mySinglyLinkedList.addAll(list2);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, mySinglyLinkedList.size());
+		Assert.assertEquals(new Integer(10), mySinglyLinkedList.getFirst());
+		Assert.assertEquals(new Integer(40), mySinglyLinkedList.getLast());
+
+		// Test Case 3 : When the list contains more than one elements
+		list1 = new SinglyLinkedList<>();
+		list1.add("mormont");
+		list1.add("theon");
+		myStringSinglyLinkedList.addAll(list1);
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 4), 4, myStringSinglyLinkedList.size());
+		Assert.assertEquals("jemmie", myStringSinglyLinkedList.getFirst());
+		Assert.assertEquals("theon", myStringSinglyLinkedList.getLast());
+
+		// Test Case 5 : Add elements to the list at nth index; the number of
+		// elements to be added could be more than the list size
+		myStringSinglyLinkedList.add("cersi");
+		myStringSinglyLinkedList.add("ned");
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, 6), 6, myStringSinglyLinkedList.size());
+		list1 = new SinglyLinkedList<>();
+		list1.add("john");
+		list1.add("sansa");
+		list1.add("arya");
+		list1.add("khalisi");
+		list1.add("peter");
+		myStringSinglyLinkedList.addAll(2, list1);
+		String[] expectedStringArray = new String[] { "jemmie", "robert", "john", "sansa", "arya", "khalisi", "peter",
+				"mormont", "theon", "cersi", "ned" };
+		Object[] actualObjectArray = myStringSinglyLinkedList.toArray();
+		myStringSinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, actualObjectArray.length), actualObjectArray.length,
+				myStringSinglyLinkedList.size());
+		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedStringArray), expectedStringArray,
+				actualObjectArray);
+		Assert.assertEquals("jemmie", myStringSinglyLinkedList.getFirst());
+		Assert.assertEquals("ned", myStringSinglyLinkedList.getLast());
+	}
+
 	private String getMessage(final String message, final Object object) {
 		return new StringBuilder().append(message).append(object).toString();
 	}
