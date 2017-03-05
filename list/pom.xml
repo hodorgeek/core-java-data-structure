@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.hodor.corejava</groupId>
-	<artifactId>core.java.data.struture</artifactId>
+	<groupId>com.hodor.corejava.ds</groupId>
+	<artifactId>list</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>ds</name>
+	<name>core-java-data-structure-list</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

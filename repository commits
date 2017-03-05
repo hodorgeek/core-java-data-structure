@@ -1,0 +1,13 @@
+/**
+ * CJDS : Implementation of various data structures using core java
+ * 
+ *
+ */
+ 
+ 1. CJDS-1  …
+	-Created the maven project for exploring the list data structures
+	-Implementation of the Singly linked list.
+	-Added the junit test cases to test various operations/methods for the SLL.
+
+ 2.	CJDS-2  …
+	-Created the maven project for impementing various searching and sorting algorithms
