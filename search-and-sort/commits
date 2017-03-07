@@ -4,5 +4,10 @@
  *
  */
  
- 1. SEARCH_AND_SORT-1	…
-	-Created the Maven project for exploring the various searching and sorting algorithms
+  1.  SEARCH_AND_SORT-1	...
+	  -Created the Maven project for exploring the various searching and sorting algorithms
+ 
+  2.  BUBBLE_SORT-1	...
+  	  -Formatted and fixed the search-and-sort/pom.xml
+  	  -Created the sample test data of integer and string type
+  	  -Added the unit test cases to test the bubble sort implementation
