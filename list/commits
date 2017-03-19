@@ -44,7 +44,6 @@
 10. JDS_SLL-10  …
 	-Added implementation for the equals(list), addAll(list), addAll(index,list) methods
 	-Written junit test cases to test the implementation for equals(), addAll(list) and addAll(index,list) methods
-    
-	 
-	 
-	 
+	
+11. JDS_SLL-11  …
+	-Added skeleton for the makeLoop, detectLoop and removeLoop

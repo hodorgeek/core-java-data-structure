@@ -469,6 +469,19 @@ public class SinglyLinkedList<T> implements List<T> {
 		return isEquals;
 	}
 
+	public void makeLoop(final int index) {
+
+	}
+
+	public boolean detectLoop() {
+		return false;
+	}
+
+	public int removeLoop() {
+		// return index of the element where we found the loop;
+		return 0;
+	}
+
 	/**
 	 * Tells if the argument is the index of an existing element for remove
 	 * operation.
