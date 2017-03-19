@@ -11,3 +11,13 @@
   	  -Formatted and fixed the search-and-sort/pom.xml
   	  -Created the sample test data of integer and string type
   	  -Added the unit test cases to test the bubble sort implementation
+  	  
+  3.  BUBBLE_SORT-2	...
+  	  -Removed the type T implementation and added for int[] array type
+  	  -Added and tested the bubble sort implementation for the int[] array type
+  	  
+  3.  SELECTION_SORT-1	...
+  	  -Added and tested the selection sort implementation for the int[] array type
+  
+  	  
+  	  	  

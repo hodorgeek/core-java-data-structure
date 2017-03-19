@@ -3,13 +3,13 @@ package com.hodor.ds.sort;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.hodor.ds.sort.impl.BubbleSort;
+import com.hodor.ds.sort.impl.SelectionSort;
 
-public class BubbleSortTest {
+public class SelectionSortTest {
 
 	private static int N = 8;
 
-	final Sortable<Integer> sortableInt = new BubbleSort<>();
+	final Sortable<Integer> selectionSort = new SelectionSort<Integer>();
 
 	private int inputArr[] = { 5, 2, 8, 1, 6, 3, 7, 4 };
 
@@ -17,7 +17,7 @@ public class BubbleSortTest {
 
 	@Test
 	public void testBubbleSorting() {
-		sortableInt.sort(inputArr, N);
+		selectionSort.sort(inputArr, N);
 		for (int i = 0; i < N; i++) {
 			System.out.print(inputArr[i] + " ");
 		}

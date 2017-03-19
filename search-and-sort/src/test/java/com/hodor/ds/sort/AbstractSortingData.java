@@ -1,8 +1,5 @@
 package com.hodor.ds.sort;
 
-import com.hodor.ds.list.List;
-import com.hodor.ds.list.sll.SinglyLinkedList;
-
 public abstract class AbstractSortingData {
 
 	private static final String HODOR = "hodor";
@@ -23,7 +20,7 @@ public abstract class AbstractSortingData {
 		return intArr;
 	}
 
-	public List<Integer> createIntList(final Integer[] objArr) {
+	/*public List<Integer> createIntList(final Integer[] objArr) {
 		final List<Integer> list = new SinglyLinkedList<>();
 		list.addAll(objArr);
 		return list;
@@ -33,5 +30,5 @@ public abstract class AbstractSortingData {
 		final List<String> list = new SinglyLinkedList<>();
 		list.addAll(objArr);
 		return list;
-	}
+	}*/
 }
