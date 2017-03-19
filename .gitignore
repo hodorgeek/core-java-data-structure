@@ -10,3 +10,16 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+list\.classpath
+list\.gitignore
+list\.project
+list\.settings\org.eclipse.core.resources.prefs
+list\.settings\org.eclipse.jdt.core.prefs
+list\.settings\org.eclipse.m2e.core.prefs
+search-and-sort\.classpath
+search-and-sort\.gitignore
+search-and-sort\.project
+search-and-sort\.settings\org.eclipse.core.resources.prefs
+search-and-sort\.settings\org.eclipse.jdt.core.prefs
+search-and-sort\.settings\org.eclipse.m2e.core.prefs
