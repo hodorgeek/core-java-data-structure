@@ -642,6 +642,66 @@ public class SinglyLinkedListTest {
 		Assert.assertEquals("ned", myStringSinglyLinkedList.getLast());
 	}
 
+	@Test
+	public void addInSortPosition() {
+		// Test Case1:When the list is empty
+		mySinglyLinkedList.addInSortPosition(15);
+		Object[] actualObjectArray = mySinglyLinkedList.toArray();
+		Object expectedObjectArray[] = new Object[] { 15 };
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, actualObjectArray.length), actualObjectArray.length,
+				mySinglyLinkedList.size());
+		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
+				actualObjectArray);
+
+		// Test case2: will insert to the start
+		mySinglyLinkedList.addInSortPosition(7);
+
+		// Test case3:will insert to the end
+		mySinglyLinkedList.addInSortPosition(50);
+		actualObjectArray = mySinglyLinkedList.toArray();
+		expectedObjectArray = new Object[] { 7, 15, 50 };
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, actualObjectArray.length), actualObjectArray.length,
+				mySinglyLinkedList.size());
+		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
+				actualObjectArray);
+
+		mySinglyLinkedList.addInSortPosition(40);
+		mySinglyLinkedList.addInSortPosition(20);
+		mySinglyLinkedList.addInSortPosition(30);
+		mySinglyLinkedList.addInSortPosition(5);
+		mySinglyLinkedList.addInSortPosition(60);
+
+		actualObjectArray = mySinglyLinkedList.toArray();
+		expectedObjectArray = new Object[] { 5, 7, 15, 20, 30, 40, 50, 60 };
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, actualObjectArray.length), actualObjectArray.length,
+				mySinglyLinkedList.size());
+		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedObjectArray), expectedObjectArray,
+				actualObjectArray);
+		Assert.assertEquals(getMessage(GET_ELEMENT_MESSAGE, new Integer(5)), new Integer(5),
+				mySinglyLinkedList.getFirst());
+		Assert.assertEquals(getMessage(GET_ELEMENT_MESSAGE, new Integer(60)), new Integer(60),
+				mySinglyLinkedList.getLast());
+
+		// Test case4:Testing for the string type
+		String[] expectedStringArray = new String[] { "arya", "cersi", "jemmie", "john", "ned", "peter", "robert",
+				"sansa", "theon" };
+		myStringSinglyLinkedList.addInSortPosition("jemmie");
+		myStringSinglyLinkedList.addInSortPosition("robert");
+		myStringSinglyLinkedList.addInSortPosition("john");
+		myStringSinglyLinkedList.addInSortPosition("sansa");
+		myStringSinglyLinkedList.addInSortPosition("arya");
+		myStringSinglyLinkedList.addInSortPosition("theon");
+		myStringSinglyLinkedList.addInSortPosition("peter");
+		myStringSinglyLinkedList.addInSortPosition("cersi");
+		myStringSinglyLinkedList.addInSortPosition("ned");
+		actualObjectArray = myStringSinglyLinkedList.toArray();
+		myStringSinglyLinkedList.printList();
+		Assert.assertEquals(getMessage(SIZE_MESSAGE, actualObjectArray.length), actualObjectArray.length,
+				myStringSinglyLinkedList.size());
+		Assert.assertArrayEquals(getMessage(TO_ARRAY_MESSAGE, expectedStringArray), expectedStringArray,
+				actualObjectArray);
+	}
+
 	private String getMessage(final String message, final Object object) {
 		return new StringBuilder().append(message).append(object).toString();
 	}

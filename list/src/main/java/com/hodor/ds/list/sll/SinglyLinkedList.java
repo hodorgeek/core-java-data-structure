@@ -172,6 +172,37 @@ public class SinglyLinkedList<T> implements List<T> {
 		this.addAll(index, objArr);
 	}
 
+	/**
+	 * addInSortPosition(element) is used to insert the element of type T in the
+	 * list at its sorted position. It will be use to create the sorted/ordered
+	 * list.
+	 * 
+	 * For example the element 20 would be inserted in the
+	 * list=5->10->15->25->30 after 15 and before 25. the final list would be
+	 * look like 5->10->15->20->25->30
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void addInSortPosition(Comparable<T> element) {
+		Node<T> current = first;
+		Node<T> previous = null;
+		while (current != null && element.compareTo(current.value) >= 1) {
+			previous = current;
+			current = current.next;
+		}
+
+		if (previous == null) { // empty list or start of the list
+			addFirst((T) element);
+		} else if (previous.next == null) { // if its end of the list
+			addLast((T) element);
+		} else {
+			Node<T> newNode = new Node<T>((T) element, null);
+			previous.next = newNode;
+			newNode.next = current;
+			size++;
+		}
+	}
+
 	@Override
 	public void printList() {
 		Node<T> tempNode = first;
@@ -480,6 +511,20 @@ public class SinglyLinkedList<T> implements List<T> {
 	public int removeLoop() {
 		// return index of the element where we found the loop;
 		return 0;
+	}
+
+	/**
+	 * If there are two pointer let say i and j point to start and ed of the
+	 * list respectively. Then its used to re arranging the list by swapping the
+	 * ith and jth node's value till the i and j are meets each other. In the
+	 * second step the i+1 and j-1 node value would be swapped.
+	 */
+	public void reArrangeList() {
+		Node<T> middle = first;
+		Node<T> temp = first;
+		while(temp!=null) {
+			
+		}
 	}
 
 	/**

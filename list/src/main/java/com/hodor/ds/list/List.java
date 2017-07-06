@@ -10,7 +10,9 @@ public interface List<T> {
 
 	public void addLast(T element);
 
-	public void add(int position, T Element);
+	public void add(int position, T element);
+	
+	public  void  addInSortPosition(Comparable<T> element);
 
 	public void addAll(T[] elements);
 
